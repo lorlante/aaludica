@@ -11,6 +11,7 @@ import PageAboutUs from "./pages/AboutUs";
 import PageCatalog from "./pages/Catalog";
 import PageDetail from "./pages/Detail";
 import PageContact from "./pages/Contact";
+import PageAdmProducts from "./pages/AdmProducts";
 
 function App() {
   return (
@@ -83,8 +84,11 @@ function App() {
                 <Route exact path="/detail">
                   <PageDetail />
                 </Route>
+                <Route exact path="/admin/products">
+                  <PageAdmProducts />
+                </Route>
 
-                <Redirect to="/aboutus" />
+                <Redirect to="/admin/products" />
               </Switch>
             </main>
           </div>
