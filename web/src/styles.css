@@ -27,11 +27,22 @@ body {
   color: #34495e;
   margin: 0px;
 }
-div#AboutUsPage {
-  margin-top: 70px;
+div#CatalogPage,
+div#AboutUsPage,
+div#CartPage {
+  margin-top: 100px;
 }
-div#CatalogPage {
-  margin-top: 80px;
+img.cartThumbnail{
+  max-height: 80px;
+  width: auto;
+}
+tr.cartRows{
+  background-color: #EEE;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+input.cartInput{
+  text-align: center;
 }
 div.section-title h4 {
   color: #111111;
@@ -56,19 +67,10 @@ nav.navbar-default {
   top: 0px;
   width: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  text-align: right;
 }
 nav.navbar-default div.navbar-brand {
   float: left;
-}
-nav.navbar-default a.navbar-item {
-  color: #9b9b9b;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 50px;
-  max-height: 60px;
-  padding: 20px 40px 5px 40px;
-  text-decoration: none;
-  text-transform: uppercase;
 }
 nav.fixed-top {
   position: fixed;
@@ -77,11 +79,50 @@ nav.fixed-top {
   left: 0;
   z-index: 1030;
 }
+a.navbar-item{
+  text-decoration: none !important;
+}
+a.navbar-item button{
+  background: #5a5f73;
+  color: #FFF;
+  padding: 10px 16px;
+  margin: 5px;
+  border-radius: 10px 10px 10px 10px;
+  border: 3px solid transparent;
+  --button-padding: 10px 16px;
+  --button-margin: 1px 10px 1px 0;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  position: relative;
+  font-family: inherit;
+  font-size: 20px;
+  text-shadow: none;
+  line-height: 1.2;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-decoration: none !important;
+  font-weight: 400!important;
+  cursor: pointer;
+  text-align: center;
+  justify-content: center;
+}
+a.navbar-item button:hover{
+  background-color: #cd2d10;
+}
 img.navbar-logo {
   display: block;
-  max-width: 65%;
   height: auto;
   margin: 5px 5px 5px 25px;
+}
+
+.navbar-item span.cart-count{
+  font-size: 8px; 
+}
+a.category_link{
+  text-decoration: none;
+  color: #333;
 }
 
 /***** Pages *****/
@@ -253,7 +294,7 @@ div.product_item div.overlay span {
   text-decoration: none;
 }
 div.product_item:hover div.overlay {
-  opacity: 0.8;
+  opacity: 0.9;
   cursor: pointer;
 }
 div.product_item .label.new {

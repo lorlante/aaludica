@@ -10,12 +10,13 @@ import {
 import PageAboutUs from "./pages/AboutUs";
 import PageCatalog from "./pages/Catalog";
 import PageDetail from "./pages/Detail";
-import PageContact from "./pages/Contact";
+import PageCart from "./pages/Cart";
 import PageAdmProducts from "./pages/AdmProducts";
+import CartProvider from "./contexts/CartContext";
 
 function App() {
   return (
-    <>
+    <CartProvider>
       <Router>
         <header>
           <nav className="navbar-default stuckMenu is-primary fixed-top">
@@ -39,29 +40,26 @@ function App() {
                     to="/aboutus"
                     activeClassName="is-active"
                   >
-                    Nosotros
+                    <button>Nosotros</button>
                   </NavLink>
-
                   <NavLink
                     className="navbar-item"
                     to="/catalog"
                     activeClassName="is-active"
                   >
-                    Catálogo
+                    <button>Catalogo</button>
                   </NavLink>
                   <NavLink
                     className="navbar-item"
-                    to="/contact"
+                    to="/cart"
                     activeClassName="is-active"
                   >
-                    Contacto
-                  </NavLink>
-                  <NavLink
-                    className="navbar-item"
-                    to="/contact"
-                    activeClassName="is-active"
-                  >
-                    Carrito
+                    <button>
+                      Carrito
+                      <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle cart-count">
+                        <span className="visually-hidden">2</span>
+                      </span>
+                    </button>
                   </NavLink>
                 </div>
               </div>
@@ -78,23 +76,23 @@ function App() {
                 <Route exact path="/catalog">
                   <PageCatalog />
                 </Route>
-                <Route exact path="/contact">
-                  <PageContact />
-                </Route>
                 <Route exact path="/detail">
                   <PageDetail />
+                </Route>
+                <Route exact path="/cart">
+                  <PageCart />
                 </Route>
                 <Route exact path="/admin/products">
                   <PageAdmProducts />
                 </Route>
 
-                <Redirect to="/admin/products" />
+                <Redirect to="/aboutus" />
               </Switch>
             </main>
           </div>
         </div>
       </Router>
-    </>
+    </CartProvider>
   );
 }
 

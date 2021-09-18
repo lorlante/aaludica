@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 const PageAboutUs = () => {
   const backgroundImageStyle = {
-    backgroundImage: `url(images/bkg-second.jpg)`,
+    backgroundImage: `url(images/bkg-first.jpg)`,
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
     backgroundPosition: "center",
@@ -56,7 +55,6 @@ const PageAboutUs = () => {
                       alt=""
                       className="mx-auto rounded-circle"
                       src="images/tonylima.jpg"
-                      alt=""
                     />
                     <p className="text-muted">Guido D. Cegarra</p>
                   </div>
@@ -67,7 +65,6 @@ const PageAboutUs = () => {
                       alt=""
                       className="mx-auto rounded-circle"
                       src="images/tonylima.jpg"
-                      alt=""
                     />
                     <p className="text-muted">Santiago Rodríguez</p>
                   </div>
@@ -78,7 +75,6 @@ const PageAboutUs = () => {
                       alt=""
                       className="mx-auto rounded-circle"
                       src="images/tonylima.jpg"
-                      alt=""
                     />
                     <p className="text-muted">Juan Manuel Domínguez</p>
                   </div>
@@ -140,6 +136,17 @@ const PageAboutUs = () => {
                   hitos de la historia de nuestro país.
                 </h5>
               </div>
+              <div class="video-box text-center">
+                <iframe
+                  width="480"
+                  height="270"
+                  src="https://www.youtube.com/embed/ScMzIvxBSi4"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
+              </div>
               <div className="packsucesos" align="center">
                 <img
                   alt=""
@@ -147,6 +154,14 @@ const PageAboutUs = () => {
                   className="img-responsive logo-juego"
                 />{" "}
               </div>
+              <div>stats</div>
+              <div>
+                <a href="#">Descargá el reglamento</a>
+              </div>
+              <div>
+                <a href="#">Descargá la app gratuita</a>
+              </div>
+              <div>Premios Poncho</div>
               <div>
                 {/* 
                 <Link to="/landing-sucesos" className="btn btn-primary">
@@ -173,6 +188,17 @@ const PageAboutUs = () => {
                   permite conocer algunas de las obras más importantes del arte
                   universal de forma amena.
                 </h5>
+              </div>
+              <div class="video-box text-center">
+                <iframe
+                  width="480"
+                  height="270"
+                  src="https://www.youtube.com/embed/ScMzIvxBSi4"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
               </div>
               <div className="packars" align="center">
                 <img
@@ -207,6 +233,17 @@ const PageAboutUs = () => {
                   roedor más gordito de todos. Pero cuidado, ¡comer mucho de la
                   misma comida te puede caer mal!
                 </h5>
+              </div>
+              <div class="video-box text-center">
+                <iframe
+                  width="480"
+                  height="270"
+                  src="https://www.youtube.com/embed/ScMzIvxBSi4"
+                  title="YouTube video player"
+                  frameborder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen
+                ></iframe>
               </div>
               <div className="packnomnoms" align="center">
                 <img
