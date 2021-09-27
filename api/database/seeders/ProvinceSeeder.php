@@ -14,6 +14,7 @@ class ProvinceSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('provinces')->truncate();
         DB::table('provinces')->insert(['name' => 'Buenos Aires', 'zone' => 2]);
         DB::table('provinces')->insert(['name' => 'Catamarca', 'zone' => 3]);
         DB::table('provinces')->insert(['name' => 'Chaco', 'zone' => 3]);

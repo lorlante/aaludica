@@ -21,12 +21,14 @@ const ProductBox = (props) => {
 
   return (
     <div className="product_item">
-      {props.product.is_new === "Y" && <div className="label new">Nuevo</div>}
+      {props.product.is_new === "Y" && (
+        <div className="label new">¡Recién llegado!</div>
+      )}
       {props.product.is_last_units === "Y" && (
-        <div className="label stockout">Últimos</div>
+        <div className="label stockout">Quedan poquitos...</div>
       )}
       {props.product.is_combo === "Y" && (
-        <div className="label combo">Combo</div>
+        <div className="label combo">** Promoción **</div>
       )}
 
       <div className="product_item_pic set-bg" style={backgroundImageStyle}>

@@ -14,6 +14,7 @@ class ProductCategorySeeder extends Seeder
      */
     public function run()
     {
+        DB::table('product_categories')->truncate();
         DB::table('product_categories')->insert(['name' => 'Historia']);
         DB::table('product_categories')->insert(['name' => 'Arte']);
         DB::table('product_categories')->insert(['name' => 'Infantiles']);

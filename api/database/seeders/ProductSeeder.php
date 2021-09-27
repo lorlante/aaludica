@@ -14,6 +14,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('products')->truncate();
         DB::table('products')->insert([
             'name' => 'Sucesos Argentinos Vol 1: "Gobiernos y Conflictos"',
             'price' => '600',
@@ -21,7 +22,8 @@ class ProductSeeder extends Seeder
             'stat_players' => '2-4 jugadores',
             'stat_age' => '10+ años',
             'stat_time' =>  '15-20 min.',
-            'main_photo' => 'sa_vol1.png'
+            'main_photo' => 'sa_vol1.png',
+            'weight' => '0.137'
 
         ]);
         DB::table('products')->insert([
@@ -31,7 +33,8 @@ class ProductSeeder extends Seeder
             'stat_players' => '2-4 jugadores',
             'stat_age' => '10+ años',
             'stat_time' =>  '15-20 min.',
-            'main_photo' => 'sa_vol2.png'
+            'main_photo' => 'sa_vol2.png',
+            'weight' => '0.137'
         ]);
         DB::table('products')->insert([
             'name' => 'Sucesos Argentinos Vol 3: "Ciencia y Cultura"',
@@ -41,7 +44,8 @@ class ProductSeeder extends Seeder
             'stat_players' => '2-4 jugadores',
             'stat_age' => '10+ años',
             'stat_time' =>  '15-20 min.',
-            'main_photo' => 'sa_vol3.png'
+            'main_photo' => 'sa_vol3.png',
+            'weight' => '0.137'
         ]);
         DB::table('products')->insert([
             'name' => 'Ars Domino',

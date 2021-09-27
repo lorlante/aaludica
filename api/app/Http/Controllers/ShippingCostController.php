@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Province;
+use App\Models\ShippingCost;
 use Illuminate\Http\Request;
 
-class ProvinceController extends Controller
+class ShippingCostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +14,7 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        $provinces = Province::all();
-        return response()->json($provinces);
+        //
     }
 
     /**
@@ -42,10 +41,10 @@ class ProvinceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Province  $province
+     * @param  \App\Models\ShippingCost  $shippingCost
      * @return \Illuminate\Http\Response
      */
-    public function show(Province $province)
+    public function show(ShippingCost $shippingCost)
     {
         //
     }
@@ -53,10 +52,10 @@ class ProvinceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Province  $province
+     * @param  \App\Models\ShippingCost  $shippingCost
      * @return \Illuminate\Http\Response
      */
-    public function edit(Province $province)
+    public function edit(ShippingCost $shippingCost)
     {
         //
     }
@@ -65,10 +64,10 @@ class ProvinceController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Province  $province
+     * @param  \App\Models\ShippingCost  $shippingCost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Province $province)
+    public function update(Request $request, ShippingCost $shippingCost)
     {
         //
     }
@@ -76,10 +75,10 @@ class ProvinceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Province  $province
+     * @param  \App\Models\ShippingCost  $shippingCost
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Province $province)
+    public function destroy(ShippingCost $shippingCost)
     {
         //
     }
