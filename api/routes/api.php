@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('provinces', 'App\Http\Controllers\ProvinceController@index');
 Route::get('products', 'App\Http\Controllers\ProductController@index');
 Route::get('categories', 'App\Http\Controllers\ProductCategoryController@index');
 

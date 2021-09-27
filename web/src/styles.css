@@ -31,6 +31,7 @@ div#CatalogPage,
 div#AboutUsPage,
 div#CartPage {
   margin-top: 100px;
+  margin-bottom: 50px;
 }
 img.cartThumbnail{
   max-height: 80px;
@@ -50,6 +51,18 @@ div.section-title h4 {
   text-transform: uppercase;
   position: relative;
   display: inline-block;
+}
+div#formDatosEnvio {
+  font-size: 22px;
+}
+div#formDatosEnvio h5{
+ margin-top: 10px;
+}
+div.backgroundResumenPedido{
+  padding: 30px;
+  background-color: #CCC;
+  border: 1px dotted #333;
+  height: 100%;
 }
 /***** NAVBAR *****/
 nav.navbar-default {

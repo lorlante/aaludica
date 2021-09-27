@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useMemo } from "react";
 import { CartContext } from "../contexts/CartContext";
 import {
   BsFillTrashFill,
@@ -8,6 +8,25 @@ import {
 
 const PageCart = () => {
   let cart = useContext(CartContext);
+  let provinces = [];
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("http://localhost:8000/api/provinces");
+      provinces = await response.json();
+    })();
+  }, []);
+
+  const checkoutInfo = useMemo(
+    (cart) => {
+      let subtotal = 0;
+
+      // cart.items.forEach((item) => subtotal + item.price * item.quantity);
+
+      return { subtotal };
+    },
+    [cart.items]
+  );
 
   return (
     <div className="container" id="CartPage">
@@ -87,43 +106,78 @@ const PageCart = () => {
                 })}
               </tbody>
             </table>
-            <div class="row">
-              <div class="col-sm-4">
-                <h5>Forma de pago</h5>
-                <select className="form-select">
-                  <option value="">Efectivo</option>
-                  <option value="">Transferencia bancaria</option>
-                  <option value="">Mercado Pago</option>
-                </select>
+            <div className="row" id="formDatosEnvio">
+              <div className="col-sm-8">
+                <div>
+                  <h5>Nombre y apellido</h5>
+                  <input type="text" className="form-control" name="" />
+                </div>
+                <div>
+                  <h5>Dirección</h5>
+                  <input type="text" className="form-control" name="" />
+                </div>
+                <div>
+                  <h5>E-Mail</h5>
+                  <input type="text" className="form-control" name="" />
+                </div>
+                <div class="row">
+                  <div className="col-sm-6">
+                    <h5>Teléfono (opcional)</h5>
+                    <input type="text" className="form-control" name="" />
+                  </div>
+                  <div className="col-sm-6">
+                    <h5>Provincia</h5>
+                    <select className="form-select">
+                      {provinces.length > 0
+                        ? provinces.map((province) => (
+                            <option value="{province.zone}">
+                              {province.name}
+                            </option>
+                          ))
+                        : ""}
+                    </select>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <h5>Forma de pago</h5>
+                    <select className="form-select">
+                      <option value="">Efectivo</option>
+                      <option value="">Transferencia bancaria</option>
+                      <option value="">Mercado Pago</option>
+                    </select>
+                  </div>
+                  <div className="col-sm-6">
+                    <h5>Forma de envío</h5>
+                    <select className="form-select">
+                      <option value="">Retiro en el local</option>
+                      <option value="">Correo Argentino</option>
+                    </select>
+                  </div>
+                </div>
               </div>
-              <div class="col-sm-4">
-                <h5>Forma de envío</h5>
-                <select className="form-select">
-                  <option value="">Retiro en el local</option>
-                  <option value="">Correo Argentino</option>
-                </select>
-              </div>
-              <div class="col-sm-4">
-                <h5 className="text-center">Resumen</h5>
-                <div class="row">
-                  <div class="col-sm-4">Subtotal</div>
-                  <div class="col-sm-4">$ 100.00</div>
+              <div className="col-sm-4 backgroundResumenPedido">
+                <h4>RESUMEN</h4>
+                <hr />
+                <div class="clearfix">
+                  <div className="float-start">Subtotal</div>
+                  <div className="float-end">$ 600.00</div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-4">Envío</div>
-                  <div class="col-sm-4">$ 10.00</div>
+                <div class="clearfix">
+                  <div className="float-start">Envío</div>
+                  <div className="float-end">$ 100.00</div>
                 </div>
-                <div class="row">
-                  <div class="col-sm-4">Total</div>
-                  <div class="col-sm-4">$ 110.00</div>
+                <hr />
+                <div class="clearfix">
+                  <div className="float-start">Total</div>
+                  <div className="float-end">$ 700.00</div>
                 </div>
+                <hr />
+                <button className="btn btn-dark btn-lg w-100">
+                  ENVIAR PEDIDO
+                </button>
               </div>
             </div>
-            {/* 
-            <div>
-              <button className="btn btn-dark ">ENVIAR</button>
-            </div>
-            */}
           </>
         ) : (
           <div>Tu carrito está vacío.</div>
