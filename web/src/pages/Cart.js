@@ -124,6 +124,8 @@ const PageCart = () => {
         text: "¿Enviar el pedido?",
         icon: "info",
         confirmButtonText: "Enviar",
+      }).then(function () {
+        window.location = "http://www.google.com";
       });
     }
   };
