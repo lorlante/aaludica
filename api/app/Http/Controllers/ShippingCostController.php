@@ -17,6 +17,12 @@ class ShippingCostController extends Controller
         //
     }
 
+    public function calculateCost()
+    {
+        $costs = ShippingCost::all();
+        return response()->json($costs);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

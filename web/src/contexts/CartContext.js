@@ -8,15 +8,20 @@ function CartProvider({ children }) {
     return cart ? JSON.parse(cart) : [];
   });
 
-  function add(id, quantity, name, main_photo, price) {
+  function add(id, quantity, name, main_photo, price, weight) {
     let item = items.find((i) => i.id === id);
     let result;
 
     if (!item) {
-      result = [...items, { id, name, main_photo, price, quantity }];
+      result = [...items, { id, name, main_photo, price, quantity, weight }];
     } else {
       result = items.map((i) =>
-        i.id === item.id ? { ...item, quantity: item.quantity + quantity } : i
+        i.id === item.id
+          ? {
+              ...item,
+              quantity: item.quantity + quantity,
+            }
+          : i
       );
     }
 

@@ -15,7 +15,8 @@ const ProductBox = (props) => {
       1,
       props.product.name,
       props.product.main_photo,
-      props.product.price
+      props.product.price,
+      props.product.weight
     );
   };
 

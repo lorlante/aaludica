@@ -6,37 +6,66 @@ import {
   BsFillDashCircleFill,
 } from "react-icons/bs";
 
+const SHIPPING_METHOD_CORREO_ARGENTINO = 2;
+
 const PageCart = () => {
   let cart = useContext(CartContext);
   const [provinces, setProvinces] = useState([]);
-  const [selectedProvinceID, setSelectedProvinceID] = useState();
+  const [selectedZone, setSelectedZone] = useState("2");
+  const [selectedShippingMethod, setSelectedShippingMethod] = useState(1);
+  const [shippingCosts, setShippingCosts] = useState([]);
 
   const checkoutInfo = useMemo(() => {
     const currencyFormat = (num) => {
       return num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     };
 
-    const getShippingCost = (zone, weight) => {};
-
+    /* Calculate cart subtotal and items weight */
     let subtotal = 0;
-    let weight = 0;
-
+    let cartWeight = 0;
     if (cart.items) {
       cart.items.forEach((item) => {
         subtotal += item.price * item.quantity;
-        weight += item.weight;
+        cartWeight += item.weight * item.quantity;
       });
     }
 
-    let shippingCost = () ? getShippingCost(zone, weight) : 0;
+    let cartShippingCost = 0;
+    // eslint-disable-next-line eqeqeq
+    if (selectedShippingMethod == SHIPPING_METHOD_CORREO_ARGENTINO) {
+      shippingCosts.forEach((s) => {
+        if (s.from < cartWeight && s.to >= cartWeight) {
+          switch (selectedZone) {
+            case "1":
+              cartShippingCost = s.cost_zone_1;
+              break;
+            case "2":
+              cartShippingCost = s.cost_zone_2;
+              break;
+            case "3":
+              cartShippingCost = s.cost_zone_3;
+              break;
+            case "4":
+              cartShippingCost = s.cost_zone_4;
+              break;
+            default:
+              cartShippingCost = -1;
+              break;
+          }
+        }
+      });
+    }
 
-    let total = subtotal + shippingCost;
+    /* Calculate Total */
+    let total = subtotal + cartShippingCost;
+
     return {
+      cartWeight: cartWeight.toFixed(2),
       subtotal: currencyFormat(subtotal),
-      shippingCost: currencyFormat(shippingCost),
+      shippingCost: currencyFormat(cartShippingCost),
       total: currencyFormat(total),
     };
-  }, [cart.items, selectedProvinceID]);
+  }, [cart.items, shippingCosts, selectedShippingMethod, selectedZone]);
 
   useEffect(() => {
     (async () => {
@@ -46,8 +75,20 @@ const PageCart = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    (async () => {
+      const response = await fetch("http://localhost:8000/api/shipping_costs");
+      const result = await response.json();
+      setShippingCosts(result);
+    })();
+  }, []);
+
   const handleProvinceChange = (e) => {
-    setSelectedProvinceID(e.target.value);
+    setSelectedZone(e.target.value);
+  };
+
+  const handleShippingMethodChange = (e) => {
+    setSelectedShippingMethod(e.target.value);
   };
 
   return (
@@ -150,7 +191,7 @@ const PageCart = () => {
                       {provinces.length > 0
                         ? provinces.map((province) => (
                             <option value={province.zone} key={province.id}>
-                              {province.name}
+                              {province.name} (z{province.zone})
                             </option>
                           ))
                         : ""}
@@ -168,9 +209,13 @@ const PageCart = () => {
                   </div>
                   <div className="col-sm-6">
                     <h5>Forma de envío</h5>
-                    <select className="form-select">
-                      <option value="">Retiro en el local</option>
-                      <option value="">Correo Argentino</option>
+                    <select
+                      className="form-select"
+                      value={selectedShippingMethod}
+                      onChange={handleShippingMethodChange}
+                    >
+                      <option value="1">Retiro en el local</option>
+                      <option value="2">Correo Argentino</option>
                     </select>
                   </div>
                 </div>
@@ -178,6 +223,13 @@ const PageCart = () => {
               <div className="col-sm-4 backgroundResumenPedido">
                 <h4>RESUMEN</h4>
                 <hr />
+                <div className="clearfix">
+                  <div className="float-start">Peso</div>
+                  <div className="float-end">
+                    {" "}
+                    {checkoutInfo.cartWeight} kgs
+                  </div>
+                </div>
                 <div className="clearfix">
                   <div className="float-start">Subtotal</div>
                   <div className="float-end">$ {checkoutInfo.subtotal}</div>
