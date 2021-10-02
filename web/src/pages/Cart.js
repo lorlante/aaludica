@@ -5,14 +5,20 @@ import {
   BsFillPlusCircleFill,
   BsFillDashCircleFill,
 } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 const SHIPPING_METHOD_CORREO_ARGENTINO = 2;
 
 const PageCart = () => {
   let cart = useContext(CartContext);
+  const [name, setName] = useState([]);
+  const [address, setAddress] = useState([]);
+  const [email, setEmail] = useState([]);
+  const [phone, setPhone] = useState([]);
   const [provinces, setProvinces] = useState([]);
   const [selectedZone, setSelectedZone] = useState("2");
   const [selectedShippingMethod, setSelectedShippingMethod] = useState(1);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(1);
   const [shippingCosts, setShippingCosts] = useState([]);
 
   const checkoutInfo = useMemo(() => {
@@ -83,12 +89,43 @@ const PageCart = () => {
     })();
   }, []);
 
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+  };
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
+  };
   const handleProvinceChange = (e) => {
     setSelectedZone(e.target.value);
   };
 
   const handleShippingMethodChange = (e) => {
     setSelectedShippingMethod(e.target.value);
+  };
+
+  const handleFormSubmit = (e) => {
+    // eslint-disable-next-line eqeqeq
+    if (name == "" || address == "" || email == "") {
+      Swal.fire({
+        title: "Error",
+        text: "Por favor, complete los datos faltantes",
+        icon: "error",
+        confirmButtonText: "Aceptar",
+      });
+    } else {
+      Swal.fire({
+        title: "Confirmación",
+        text: "¿Enviar el pedido?",
+        icon: "info",
+        confirmButtonText: "Enviar",
+      });
+    }
   };
 
   return (
@@ -167,20 +204,44 @@ const PageCart = () => {
               <div className="col-sm-8">
                 <div>
                   <h5>Nombre y apellido</h5>
-                  <input type="text" className="form-control" name="" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name=""
+                    value={name}
+                    onChange={handleNameChange}
+                  />
                 </div>
                 <div>
                   <h5>Dirección</h5>
-                  <input type="text" className="form-control" name="" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name=""
+                    value={address}
+                    onChange={handleAddressChange}
+                  />
                 </div>
                 <div>
                   <h5>E-Mail</h5>
-                  <input type="text" className="form-control" name="" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    name=""
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
                 </div>
                 <div className="row">
                   <div className="col-sm-6">
                     <h5>Teléfono (opcional)</h5>
-                    <input type="text" className="form-control" name="" />
+                    <input
+                      type="text"
+                      className="form-control"
+                      name=""
+                      value={phone}
+                      onChange={handlePhoneChange}
+                    />
                   </div>
                   <div className="col-sm-6">
                     <h5>Provincia</h5>
@@ -191,7 +252,7 @@ const PageCart = () => {
                       {provinces.length > 0
                         ? provinces.map((province) => (
                             <option value={province.zone} key={province.id}>
-                              {province.name} (z{province.zone})
+                              {province.name}
                             </option>
                           ))
                         : ""}
@@ -222,20 +283,20 @@ const PageCart = () => {
               </div>
               <div className="col-sm-4 backgroundResumenPedido">
                 <h4>RESUMEN</h4>
+                <div className="clearfix">
+                  <div className="float-start">Subtotal</div>
+                  <div className="float-end">$ {checkoutInfo.subtotal}</div>
+                </div>
                 <hr />
                 <div className="clearfix">
-                  <div className="float-start">Peso</div>
+                  <div className="float-start">Peso Total</div>
                   <div className="float-end">
                     {" "}
                     {checkoutInfo.cartWeight} kgs
                   </div>
                 </div>
                 <div className="clearfix">
-                  <div className="float-start">Subtotal</div>
-                  <div className="float-end">$ {checkoutInfo.subtotal}</div>
-                </div>
-                <div className="clearfix">
-                  <div className="float-start">Envío</div>
+                  <div className="float-start">Costo de Envío</div>
                   <div className="float-end">$ {checkoutInfo.shippingCost}</div>
                 </div>
                 <hr />
@@ -244,7 +305,10 @@ const PageCart = () => {
                   <div className="float-end">$ {checkoutInfo.total}</div>
                 </div>
                 <hr />
-                <button className="btn btn-dark btn-lg w-100">
+                <button
+                  className="btn btn-dark btn-lg w-100"
+                  onClick={handleFormSubmit}
+                >
                   ENVIAR PEDIDO
                 </button>
               </div>

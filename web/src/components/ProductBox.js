@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../contexts/CartContext";
+import { BsExclamationCircleFill, BsStarFill, BsTagFill } from "react-icons/bs";
 
 const ProductBox = (props) => {
   let cart = useContext(CartContext);
@@ -23,13 +24,25 @@ const ProductBox = (props) => {
   return (
     <div className="product_item">
       {props.product.is_new === "Y" && (
-        <div className="label new">¡Recién llegado!</div>
+        <div className="label new">
+          <BsStarFill />
+          &nbsp; ¡Recién llegado! &nbsp;
+          <BsStarFill />
+        </div>
       )}
       {props.product.is_last_units === "Y" && (
-        <div className="label stockout">Quedan poquitos...</div>
+        <div className="label stockout">
+          <BsExclamationCircleFill />
+          &nbsp; Quedan poquitos... &nbsp;
+          <BsExclamationCircleFill />
+        </div>
       )}
       {props.product.is_combo === "Y" && (
-        <div className="label combo">** Promoción **</div>
+        <div className="label combo">
+          <BsTagFill />
+          &nbsp; Combo &nbsp;
+          <BsTagFill />
+        </div>
       )}
 
       <div className="product_item_pic set-bg" style={backgroundImageStyle}>

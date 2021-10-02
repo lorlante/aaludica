@@ -24,7 +24,6 @@ function CartProvider({ children }) {
           : i
       );
     }
-
     setItems(result);
   }
 

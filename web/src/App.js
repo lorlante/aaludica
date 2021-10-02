@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   BrowserRouter as Router,
   Link,
@@ -13,8 +13,10 @@ import PageDetail from "./pages/Detail";
 import PageCart from "./pages/Cart";
 import PageAdmProducts from "./pages/AdmProducts";
 import CartProvider from "./contexts/CartContext";
+import { CartContext } from "./contexts/CartContext";
 
 function App() {
+  let cart = useContext(CartContext);
   return (
     <CartProvider>
       <Router>
@@ -57,7 +59,9 @@ function App() {
                     <button>
                       Carrito
                       <span className="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle cart-count">
-                        <span className="visually-hidden">2</span>
+                        <span className="cart-total-badge">
+                          {cart.items.length}
+                        </span>
                       </span>
                     </button>
                   </NavLink>
